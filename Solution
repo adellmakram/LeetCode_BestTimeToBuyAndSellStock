@@ -1,0 +1,42 @@
+namespace LeetCode
+{
+    public class Solution
+    {
+        public int MaxProfit(int[] prices)
+        {
+            if(prices.Length < 2)
+                return 0;
+
+            int minimum = prices[0];
+            int maximum = prices[0];
+            int maxProfit = 0;
+            int i = 0;
+            for (int j = 1; j < prices.Length; j++)
+            {
+                if (prices[j] < prices[i])
+                {
+                    i = j;
+                    minimum = prices[j];
+                    maximum = prices[j];
+                    continue;
+                }
+
+                if (prices[j] < minimum)
+                {
+                    minimum = prices[j];
+                    i = j;
+                }
+
+                if (prices[j] > maximum)
+                {
+                    maximum = prices[j];
+                }
+
+                if (maxProfit < (maximum - minimum))
+                    maxProfit = maximum - minimum;
+            }
+
+            return maxProfit;
+        }
+    }
+}
